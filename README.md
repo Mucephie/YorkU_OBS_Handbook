@@ -123,6 +123,7 @@ The Allan I. Carswell Observatory Handbook
  
                imstdev  
                
+     Again, the defaults should be sufficient, so you can just press enter. The program will ask you if you want to include any outlier data. Type **no** to remove this value from the average. The program will ask you to save this value to a file in your working directory. Say **yes**. The file is saved as 'stdev.dat'.  
      
  
 
