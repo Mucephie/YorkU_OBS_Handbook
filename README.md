@@ -63,11 +63,11 @@ The Allan I. Carswell Observatory Handbook
  
                   aimr  
                   
-     The program will open in the terminal. Defaults should be sufficient and thus hit return in answer to each query. For example, the first prompt is for _a List of images to examine_ and the default is object.list so you can just hit enter. Answer "n" when prompted for **use alignment parameters file (y/n)?** It will now ask for a list of the region files. The default is again ds9.reg, which again you can just click enter. The rest of the options you can hit enter through as their defaults should be correct.
-     **Note: Once the program begins running you will see an output of object names, number of objects found for each image and a hit rate. aimr will look for the target stars in each image.**
-     If it does not find all objects (due to realignment or the dome getting in the way), do the following:
-       If you have images where stars are visible but not in expected locations, you can redirect IRAF to the location by making additional region files. Those commands follow but it is not recommended you do this unless you are expirienced with data reduction. Better to simply delete the problematic images from object.list.
-       Still in the LINUX terminal, open first image that aimr cannot find in ds9. If you can see your star field in that image, click on each star (as done with the first image of the night in step 13) and go to 'Save Region'. This time make sure to change the file name (ex. change ds9.reg to ds91.reg). Next create a file in the working folder called _"alignpars.txt"_ . In this file write where to look for each saved image (must include the first image of the night).
+     The program will open in the terminal. Defaults should be sufficient and thus hit return in answer to each query. For example, the first prompt is for _a List of images to examine_ and the default is object.list so you can just hit enter. Answer "n" when prompted for **use alignment parameters file (y/n)?** It will now ask for a list of the region files. The default is again ds9.reg, which again you can just click enter. The rest of the options you can hit enter through as their defaults should be correct.  
+     **Note: Once the program begins running you will see an output of object names, number of objects found for each image and a hit rate. aimr will look for the target stars in each image.**  
+     If it does not find all objects (due to realignment or the dome getting in the way), do the following:  
+       If you have images where stars are visible but not in expected locations, you can redirect IRAF to the location by making additional region files. Those commands follow but it is not recommended you do this unless you are expirienced with data reduction. Better to simply delete the problematic images from object.list.  
+       Still in the LINUX terminal, open first image that aimr cannot find in ds9. If you can see your star field in that image, click on each star (as done with the first image of the night in step 13) and go to 'Save Region'. This time make sure to change the file name (ex. change ds9.reg to ds91.reg). Next create a file in the working folder called _"alignpars.txt"_ . In this file write where to look for each saved image (must include the first image of the night).  
        Example on what to write in the _alignpars.txt_ file:
        
                  @be_lyn.00000025.fits- >ds9.reg (first saved image)
@@ -79,7 +79,50 @@ The Allan I. Carswell Observatory Handbook
  
                  opf2mark
                  
-   Default settings should be as follows (if default is correct hit ENTER):
+   Default settings should be as follows (if default is correct hit ENTER):  
+   
+   list of images for mark files (**object.list**):  
+   object position file (**aimr_coord.opf**):  
+   dump directory for mark files (**CWD**):  
+   use contiguous objects present in all frams (**1**):  
+   create blank file if no object were found in a frame (**1**):  
+   
+   This program will create a series of .mark files for each star. These need to be compiled into one list by entering:  
+   
+                 ls *.mark >marklist.mark
+                 
+ 17. You will need the header information of the 1st image from the night for documentation. From your IRAF terminal  
+      ### For the first time user only  
+ | You first need to edit the parameter file of _imhead_. Type: `epar imhead` Then change longhead to yes and type `:q` to exit |  
+ | ------ |  
+     Still in your IRAF terminal, in order to get the header information type:  
+      
+          imhead star001.fits >header.txt
+          Ex. imhead be_lyn.00000025.fits >header.txt  
+          
+ 18. You need to get the values for your full width half maximum and sigma. From the IRAF terminal  
+       ### For the first time user only  
+ | You first need to change the settingsof imexamine. Again to do this type: `epar imexamine` Change **ncstat** and **slstat** to 10 each. To exit type `:q` |  
+ | ------ |  
+   To get an average Full width hal maximum value (the direct value) across the whole observing night. In LINUX Type:  
+     
+                FWHM  
+                
+   You will see the following default settings (first time users may need to enter it in). Hit ENTER if correct:  
+   
+   Enter AIMR coordinates file (**aimr_coord.opf**):  
+   Enter object list file name (**object.list**):  
+   Enter acceptable number of standard deviations (**1.0**):  
+   Try different standard deviation (**Y/n**)?:  
+   
+   **Note: If SD>20 enter Y and try a different 'acceptable number of standard deviations', but if SD<20 enter n**  
+   
+   Your FWHM value will be saved in a file called 'FWHM.dat' in your working directory. Note, if FWHM fails, you can assume a value of 9 for FWHM later in the data reduction process.  
+ 19. To calculate the sigma value (the standard deviation), in your LINUX terminal type:  
+ 
+               imstdev  
+               
+     
  
 
 
