@@ -104,7 +104,8 @@ The Allan I. Carswell Observatory Handbook
        ### For the first time user only  
  | You first need to change the settingsof imexamine. Again to do this type: `epar imexamine` Change **ncstat** and **slstat** to 10 each. To exit type `:q` |  
  | ------ |  
-   To get an average Full width hal maximum value (the direct value) across the whole observing night. In LINUX Type:  
+ 
+   To get an average Full width half maximum value (the direct value) across the whole observing night. In LINUX Type:  
      
                 FWHM  
                 
